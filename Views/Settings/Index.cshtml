@@ -1,8 +1,29 @@
-﻿
+﻿@using WebTest.Models.ViewModels.Settings;
+@model List<SettingsIndexVM>
 @{
     ViewData["Title"] = "Settings";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Settings</h1>
+
+    <div class="container">
+        <h1 class="display-4">Settings</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Setting</th>
+                    <th scope="col">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Name</th>
+                        <td>@item.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

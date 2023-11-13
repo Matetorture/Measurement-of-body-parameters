@@ -1,7 +1,38 @@
-﻿@{
+﻿@using WebTest.Models.ViewModels.Devices;
+@model List<DevicesIndexVM>
+@{
     ViewData["Title"] = "My Devices";
 }
 
 <div class="text-center">
-    <h1 class="display-4">My Devices</h1>
+    <h1 class="display-4"><b>My Devices</b></h1>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Connected Date</th>
+                    <th>Connect</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TestDate</td>
+                        <td>@item.Connect</td>
+                        <td>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editRecordModal">Edit</button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRecordModal">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Add Record</button>
+        </p>
+    </div>
 </div>

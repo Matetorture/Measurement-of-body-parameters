@@ -1,8 +1,50 @@
-﻿
+﻿@using WebTest.Models.ViewModels.Tests;
+@model List<TestsIndexVM>
 @{
     ViewData["Title"] = "My Tests";
 }
 
 <div class="text-center">
-    <h1 class="display-4">My Tests</h1>
+    <h1 class="display-4"><b>My Tests</b></h1>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Test Date</th>
+                    <th>Pulse</th>
+                    <th>Saturation</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Body Circumference</th>
+                    <th>Additional Observations</th>
+                    <th>Glucose</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TestDate</td>
+                        <td>@item.Pulse</td>
+                        <td>@item.Saturation</td>
+                        <td>@item.Weight</td>
+                        <td>@item.Height</td>
+                        <td>@item.BodyCircumference</td>
+                        <td>@item.AdditionalObservations</td>
+                        <td>@item.Glucose</td>
+                        <td>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#editRecordModal">Edit</button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRecordModal">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Add Record</button>
+        </p>
+    </div>
 </div>
