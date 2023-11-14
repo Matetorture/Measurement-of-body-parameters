@@ -16,17 +16,16 @@ namespace WebTest.Models.Tests
             string value
         )
         {
-            Test = new TestEntity(
-                name,
-                DateTime.Now,
-                description,
-                safeRange,
-                unit,
-                valueTemplate,
-                testType,
-                bodyMeasure,
-                value
-            );
+            Test = new TestEntity();
+            Test.Name = name;
+            Test.Date = DateTime.Now;
+            Test.Description = description;
+            Test.SafeRange = safeRange;
+            Test.Unit = unit;
+            Test.ValueTemplate = valueTemplate;
+            Test.TestType = testType;
+            Test.BodyMeasure = bodyMeasure;
+            Test.Value = value;
         }
     }
 }

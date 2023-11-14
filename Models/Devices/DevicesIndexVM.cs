@@ -13,12 +13,11 @@ namespace WebTest.Models.Devices
             bool connected
         )
         {
-            Device = new DeviceEntity(
-                id,
-                DateTime.Now,
-                name,
-                connected
-            );
+            Device = new DeviceEntity();
+            Device.Id = id;
+            Device.PairingDate = DateTime.Now;
+            Device.Name = name;
+            Device.Connect = connected;
         }
     }
 }
