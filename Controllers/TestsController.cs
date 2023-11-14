@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebTest.Models.ViewModels.Tests;
+using WebTest.Data.Tests;
+using WebTest.Models.Tests;
 
 namespace WebTest.Controllers
 {
@@ -11,9 +12,28 @@ namespace WebTest.Controllers
         public IActionResult Index()
         {
 
-            var viewModel = new List<TestsIndexVM> {
-                new TestsIndexVM { Id = 1, TestDate = DateTime.Now, Pulse = 75, Saturation = 98, Weight = 70, Height = 180, BodyCircumference = 100, AdditionalObservations = "No issues", Glucose = 90 },
-                new TestsIndexVM { Id = 2, TestDate = DateTime.Now.AddDays(-1), Pulse = 80, Saturation = 99, Weight = 72, Height = 175, BodyCircumference = 98, AdditionalObservations = "Stable", Glucose = 95 }
+            var viewModel = new List<TestsIndexVM>
+            {
+                new TestsIndexVM(
+                    "Test 1",
+                    "Description 1",
+                    10.0,
+                    "kg",
+                    "Template 1",
+                    TestType.Pulse,
+                    BodyMeasure.Arm,
+                    "Value 1"
+                ),
+                new TestsIndexVM(
+                    "Test 2",
+                    "Description 2",
+                    15.0,
+                    "lbs",
+                    "Template 2",
+                    TestType.Weight,
+                    BodyMeasure.Chest,
+                    "Value 2"
+                )
             };
 
             return View(viewModel);

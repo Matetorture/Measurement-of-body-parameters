@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebTest.Models.ViewModels.Settings;
+using WebTest.Models.Settings;
 
 namespace WebTest.Controllers
 {

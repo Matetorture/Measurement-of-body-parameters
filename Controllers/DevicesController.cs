@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebTest.Models.ViewModels.Devices;
+using WebTest.Models.Devices;
+using WebTest.Data.Devices;
 
 namespace WebTest.Controllers
 {
@@ -10,8 +11,8 @@ namespace WebTest.Controllers
         public IActionResult Index()
         {
             var viewModel = new List<DevicesIndexVM> {
-                new DevicesIndexVM { Id = 1, TestDate = DateTime.Now, Name = "x1", Connect = false },
-                new DevicesIndexVM { Id = 2, TestDate = DateTime.Now.AddDays(-1), Name = "x2", Connect = true }
+                new DevicesIndexVM(1, "x1", false ),
+                new DevicesIndexVM(2, "x2", true )
             };
 
             return View(viewModel);

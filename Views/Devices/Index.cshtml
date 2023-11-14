@@ -1,4 +1,4 @@
-﻿@using WebTest.Models.ViewModels.Devices;
+﻿@using WebTest.Models.Devices;
 @model List<DevicesIndexVM>
 @{
     ViewData["Title"] = "My Devices";
@@ -12,6 +12,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Connected Date</th>
+                    <th>Name</th>
                     <th>Connect</th>
                     <th>Actions</th>
                 </tr>
@@ -20,9 +21,10 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.TestDate</td>
-                        <td>@item.Connect</td>
+                        <td>@item.Device.Id</td>
+                        <td>@item.Device.Name</td>
+                        <td>@item.Device.PairingDate</td>
+                        <td>@item.Device.Connect</td>
                         <td>
                             <button class="btn btn-warning" data-toggle="modal" data-target="#editRecordModal">Edit</button>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRecordModal">Delete</button>

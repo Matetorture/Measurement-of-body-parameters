@@ -1,4 +1,5 @@
-﻿@using WebTest.Models.ViewModels.Tests;
+﻿@using WebTest.Data.Tests;
+@using WebTest.Models.Tests;
 @model List<TestsIndexVM>
 @{
     ViewData["Title"] = "My Tests";
@@ -10,15 +11,15 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Name</th>
                     <th>Test Date</th>
-                    <th>Pulse</th>
-                    <th>Saturation</th>
-                    <th>Weight</th>
-                    <th>Height</th>
-                    <th>Body Circumference</th>
-                    <th>Additional Observations</th>
-                    <th>Glucose</th>
+                    <th>Description</th>
+                    <th>SafeRange</th>
+                    <th>Unit</th>
+                    <th>Value Template</th>
+                    <th>Test Type</th>
+                    <th>BodyMeasure</th>
+                    <th>Value</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -26,15 +27,15 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Id</td>
-                        <td>@item.TestDate</td>
-                        <td>@item.Pulse</td>
-                        <td>@item.Saturation</td>
-                        <td>@item.Weight</td>
-                        <td>@item.Height</td>
-                        <td>@item.BodyCircumference</td>
-                        <td>@item.AdditionalObservations</td>
-                        <td>@item.Glucose</td>
+                        <td>@item.Test.Name</td>
+                        <td>@item.Test.Date</td>
+                        <td>@item.Test.Description</td>
+                        <td>@item.Test.SafeRange</td>
+                        <td>@item.Test.Unit</td>
+                        <td>@item.Test.Value</td>
+                        <td>@item.Test.TestType</td>
+                        <td>@item.Test.BodyMeasure</td>
+                        <td>@item.Test.Value</td>
                         <td>
                             <button class="btn btn-warning" data-toggle="modal" data-target="#editRecordModal">Edit</button>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRecordModal">Delete</button>
