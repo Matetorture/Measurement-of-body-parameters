@@ -1,31 +1,113 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebTest.Models.Devices;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using WebTest.Data;
 using WebTest.Data.Devices;
+using WebTest.Repositories;
 
 namespace WebTest.Controllers
 {
-    [Authorize]
     public class DevicesController : Controller
     {
-        public IActionResult Index()
-        {
-            var viewModel = new List<DevicesIndexVM> {
-                new DevicesIndexVM(1, "x1", false ),
-                new DevicesIndexVM(2, "x2", true )
-            };
+        private readonly ApplicationDbContext _context;
+        private readonly IDevicesRepository _repo;
 
-            return View(viewModel);
+        public DevicesController(ApplicationDbContext context, IDevicesRepository repo)
+        {
+            _context = context;
+            _repo = repo;
         }
 
-        public IActionResult Pairing()
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+              return View(_repo.GetAll());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Device == null)
+            {
+                return NotFound();
+            }
+
+            var deviceEntity = _repo.Get(id);
+
+            return View(deviceEntity);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Preview()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,UserId,PairingDate,Name,Connect")] DeviceEntity deviceEntity)
         {
-            return View();
+            _repo.Add(deviceEntity);
+
+            return RedirectToAction(nameof(Index));
+    }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Device == null)
+            {
+                return NotFound();
+            }
+
+            var deviceEntity = _repo.Get(id);
+
+            return View(deviceEntity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,PairingDate,Name,Connect")] DeviceEntity deviceEntity)
+        {
+            if (id != deviceEntity.Id)
+            {
+                return NotFound();
+            }
+
+            _repo.Update(deviceEntity);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Device == null)
+            {
+                return NotFound();
+            }
+
+            var deviceEntity = _repo.Get(id);
+
+            return View(deviceEntity);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Device == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Device'  is null.");
+            }
+
+            _repo.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

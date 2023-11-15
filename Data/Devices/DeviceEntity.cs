@@ -3,6 +3,7 @@
     public class DeviceEntity
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public DateTime PairingDate { get; set; }
         public string? Name { get; set; }
         public bool Connect { get; set; }

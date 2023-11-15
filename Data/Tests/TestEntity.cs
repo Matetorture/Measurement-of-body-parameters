@@ -2,6 +2,8 @@
 {
     public class TestEntity
     {
+        public int Id { get; set; }
+        public int IdUser { get; set; }
         public string? Name { get; set; }
         public DateTime Date { get; set; }
         public string? Description { get; set; }
