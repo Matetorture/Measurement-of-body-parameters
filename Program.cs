@@ -17,6 +17,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IDevicesRepository, DevicesRepository>();
 
+builder.Services.AddTransient<ITestsRepository, TestsRepository>();
+
 
 var app = builder.Build();
 

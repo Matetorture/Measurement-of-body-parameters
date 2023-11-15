@@ -1,51 +1,91 @@
-﻿@using WebTest.Data.Tests;
-@using WebTest.Models.Tests;
-@model List<TestsIndexVM>
+﻿@model IEnumerable<WebTest.Data.Tests.TestEntity>
+
 @{
     ViewData["Title"] = "My Tests";
 }
 
-<div class="text-center">
-    <h1 class="display-4"><b>My Tests</b></h1>
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Test Date</th>
-                    <th>Description</th>
-                    <th>SafeRange</th>
-                    <th>Unit</th>
-                    <th>Value Template</th>
-                    <th>Test Type</th>
-                    <th>BodyMeasure</th>
-                    <th>Value</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Test.Name</td>
-                        <td>@item.Test.Date</td>
-                        <td>@item.Test.Description</td>
-                        <td>@item.Test.SafeRange</td>
-                        <td>@item.Test.Unit</td>
-                        <td>@item.Test.Value</td>
-                        <td>@item.Test.TestType</td>
-                        <td>@item.Test.BodyMeasure</td>
-                        <td>@item.Test.Value</td>
-                        <td>
-                            <button class="btn btn-warning" data-toggle="modal" data-target="#editRecordModal">Edit</button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteRecordModal">Delete</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <p>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Add Record</button>
-        </p>
-    </div>
+<div class="container text-center">
+    <h1>My Tests</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SafeRange)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValueTemplate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BodyMeasure)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Value)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SafeRange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValueTemplate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BodyMeasure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-warning">Edit</button></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-info">Details</button></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <p>
+        <a asp-action="Create"><button class="btn btn-primary">Create new</button></a>
+    </p>
 </div>

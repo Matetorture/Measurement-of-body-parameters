@@ -1,52 +1,113 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using WebTest.Data;
 using WebTest.Data.Tests;
-using WebTest.Models.Tests;
+using WebTest.Repositories;
 
 namespace WebTest.Controllers
 {
-    [Authorize]
     public class TestsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly ITestsRepository _repo;
 
-        public IActionResult Index()
+        public TestsController(ApplicationDbContext context, ITestsRepository repo)
         {
-
-            var viewModel = new List<TestsIndexVM>
-            {
-                new TestsIndexVM(
-                    "Test 1",
-                    "Description 1",
-                    10.0,
-                    "kg",
-                    "Template 1",
-                    TestType.Pulse,
-                    BodyMeasure.Arm,
-                    "Value 1"
-                ),
-                new TestsIndexVM(
-                    "Test 2",
-                    "Description 2",
-                    15.0,
-                    "lbs",
-                    "Template 2",
-                    TestType.Weight,
-                    BodyMeasure.Chest,
-                    "Value 2"
-                )
-            };
-
-            return View(viewModel);
+            _context = context;
+            _repo = repo;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+              return View(_repo.GetAll());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Test == null)
+            {
+                return NotFound();
+            }
+
+            var TestEntity = _repo.Get(id);
+
+            return View(TestEntity);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Show()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity TestEntity)
         {
-            return View();
+            _repo.Add(TestEntity);
+
+            return RedirectToAction(nameof(Index));
+    }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Test == null)
+            {
+                return NotFound();
+            }
+
+            var TestEntity = _repo.Get(id);
+
+            return View(TestEntity);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity TestEntity)
+        {
+            if (id != TestEntity.Id)
+            {
+                return NotFound();
+            }
+
+            _repo.Update(TestEntity);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Test == null)
+            {
+                return NotFound();
+            }
+
+            var TestEntity = _repo.Get(id);
+
+            return View(TestEntity);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Test == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Test'  is null.");
+            }
+
+            _repo.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
