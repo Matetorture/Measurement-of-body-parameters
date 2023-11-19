@@ -36,9 +36,7 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            var TestEntity = _repo.Get(id);
-
-            return View(TestEntity);
+            return View(_repo.Get(id));
         }
 
         [HttpGet]
@@ -49,12 +47,12 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity TestEntity)
+        public async Task<IActionResult> Create([Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
-            _repo.Add(TestEntity);
+            _repo.Add(testEntity);
 
             return RedirectToAction(nameof(Index));
-    }
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
@@ -64,21 +62,19 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            var TestEntity = _repo.Get(id);
-
-            return View(TestEntity);
+            return View(_repo.Get(id));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity TestEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
-            if (id != TestEntity.Id)
+            if (id != testEntity.Id)
             {
                 return NotFound();
             }
 
-            _repo.Update(TestEntity);
+            _repo.Update(testEntity);
 
             return RedirectToAction(nameof(Index));
         }
@@ -91,9 +87,7 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            var TestEntity = _repo.Get(id);
-
-            return View(TestEntity);
+            return View(_repo.Get(id));
         }
 
         [HttpPost, ActionName("Delete")]

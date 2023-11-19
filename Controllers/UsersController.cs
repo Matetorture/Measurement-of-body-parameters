@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebTest.Data;
-using WebTest.Data.Devices;
+using WebTest.Data.Tests;
+using WebTest.Data.Users;
 using WebTest.Repositories;
 
 namespace WebTest.Controllers
 {
-    public class DevicesController : Controller
+    public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IDevicesRepository _repo;
+        private readonly IUsersRepository _repo;
 
-        public DevicesController(ApplicationDbContext context, IDevicesRepository repo)
+        public UsersController(ApplicationDbContext context, IUsersRepository repo)
         {
             _context = context;
             _repo = repo;
@@ -25,16 +26,18 @@ namespace WebTest.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return View(_repo.GetAll());
+            return View(_repo.GetAll());
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Device == null)
+            if (id == null || _context.Test == null)
             {
                 return NotFound();
             }
+
+            var userEntity = _repo.Get(id);
 
             return View(_repo.Get(id));
         }
@@ -47,17 +50,17 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,PairingDate,Name,Connect")] DeviceEntity deviceEntity)
+        public async Task<IActionResult> Create([Bind("Id,Role,BloodType,Rh")] UserEntity userEntity)
         {
-            _repo.Add(deviceEntity);
+            _repo.Add(userEntity);
 
             return RedirectToAction(nameof(Index));
-    }
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Device == null)
+            if (id == null || _context.User == null)
             {
                 return NotFound();
             }
@@ -67,22 +70,22 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,PairingDate,Name,Connect")] DeviceEntity deviceEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Role,BloodType,Rh")] UserEntity userEntity)
         {
-            if (id != deviceEntity.Id)
+            if (id != userEntity.Id)
             {
                 return NotFound();
             }
 
-            _repo.Update(deviceEntity);
+            _repo.Update(userEntity);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); ;
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Device == null)
+            if (id == null || _context.Test == null)
             {
                 return NotFound();
             }
@@ -94,9 +97,9 @@ namespace WebTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Device == null)
+            if (_context.Test == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Device'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Test'  is null.");
             }
 
             _repo.Delete(id);

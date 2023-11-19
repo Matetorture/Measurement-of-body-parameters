@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Update.Internal;
-using WebTest.Data;
+﻿using WebTest.Data;
 using WebTest.Data.Tests;
 
 namespace WebTest.Repositories
