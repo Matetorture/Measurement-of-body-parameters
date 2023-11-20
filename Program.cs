@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebTest.Data;
+using WebTest.Data.Users;
 using WebTest.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,15 +12,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<UserEntity>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IDevicesRepository, DevicesRepository>();
 
 builder.Services.AddTransient<ITestsRepository, TestsRepository>();
-
-builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 
 
 var app = builder.Build();

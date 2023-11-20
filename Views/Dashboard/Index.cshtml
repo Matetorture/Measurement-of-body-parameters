@@ -7,6 +7,19 @@
     <div class="col-md-4 bg-primary bg-gradient rounded d-flex align-items-center justify-content-center my-2">
         <div>
             Last test
+            @if (Model.User.FirstName == null && Model.User.LastName == null)
+            {
+                <p>1. Start by adding </p>
+                <a asp-controller="Profile" asp-action="Create"><button class="btn btn-info mt-2 text-white">Add</button></a>
+            }
+            else
+            {
+                <p class="h5">Welcome, @Model.User.FirstName @Model.User.LastName</p>
+            }
+            @foreach(var device in Model.User.Devices)
+            {
+                @device.Name <br />
+            }
         </div>
     </div>
     <div class="col-md-8">
@@ -18,7 +31,6 @@
                             <img src="icons/view.svg" width="120" />
                             <br />
                             My tests
-                            @Model
                         </div>
                     </div>
                 </a>

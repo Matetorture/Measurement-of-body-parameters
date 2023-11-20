@@ -1,16 +1,9 @@
-﻿using WebTest.Data.Tests;
+﻿using WebTest.Data.Users;
 
 namespace WebTest.Models.Dashboard
 {
     public class DashboardIndexVM
     {
-        public DateTime LastTestDate { get; set; }
-
-        public DashboardIndexVM(
-            DateTime TestDate
-        )
-        {
-            LastTestDate = TestDate;
-        }
+        public UserEntity User { get; set; }
     }
 }
