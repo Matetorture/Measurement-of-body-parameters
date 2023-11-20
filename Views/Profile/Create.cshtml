@@ -1,26 +1,50 @@
-﻿@model WebTest.Models.Profile.ProfileIndexVM
+﻿@using WebTest.Data.Profiles
+@model WebTest.Models.Profile.ProfileIndexVM
 
 @{
     ViewData["Title"] = "Create";
 }
 <div class="container">
-    <h1>Edit</h1>
+    <h1>Create</h1>
 
     <hr />
     <div class="row">
         <div class="col-md-4">
-            @Model.User.FirstName
-            @if(Model.User.Profile == null)
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="User.FirstName" class="control-label"></label>
+                    <input asp-for="User.FirstName" class="form-control" />
+                    <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.LastName" class="control-label"></label>
+                    <input asp-for="User.LastName" class="form-control" />
+                    <span asp-validation-for="User.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Profile.BloodType" class="control-label"></label>
+                    <select asp-for="User.Profile.BloodType" asp-items="Html.GetEnumSelectList<BloodType>()" class="form-control">
+                        <option value="">-- Select --</option>
+                    </select>
+                    <span asp-validation-for="User.Profile.BloodType" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="User.Profile.Rh" /> @Html.DisplayNameFor(model => model.User.Profile.Rh)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary mt-2" />
+                </div>
+            </form>
+            @if (Model.User.Profile != null)
             {
-                <form asp-action="Create">
-
-                </form>
+                <script>
+                    window.location.href = 'Edit';
+                </script>
             }
-            else
-            {
-                
-            }
-        </div>
+            </div>
     </div>
 </div>
 

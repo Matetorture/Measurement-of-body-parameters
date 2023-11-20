@@ -57,7 +57,7 @@ namespace WebTest.Controllers
             _repo.Add(deviceEntity);
 
             return RedirectToAction(nameof(Index));
-    }
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)

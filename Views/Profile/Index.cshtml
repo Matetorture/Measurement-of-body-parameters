@@ -11,7 +11,7 @@
             <td>
             @if (Model.User.FirstName == null)
             {
-                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>firs name</u></b></button></a>
+                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>firs name</u></b></button></a>
             }
             else
             {
@@ -24,7 +24,7 @@
             <td>
             @if (Model.User.LastName == null)
             {
-                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>last name</u></b></button></a>
+                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>last name</u></b></button></a>
             }
             else
             {
@@ -37,7 +37,7 @@
             <td>
                 @if (Model.User.Profile == null)
                 {
-                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>blood type</u></b></button></a>
+                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>blood type</u></b></button></a>
                 }
                 else
                 {

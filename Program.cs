@@ -20,6 +20,8 @@ builder.Services.AddTransient<IDevicesRepository, DevicesRepository>();
 
 builder.Services.AddTransient<ITestsRepository, TestsRepository>();
 
+builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+
 
 var app = builder.Build();
 
