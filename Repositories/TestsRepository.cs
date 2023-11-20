@@ -1,4 +1,5 @@
-﻿using WebTest.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WebTest.Data;
 using WebTest.Data.Tests;
 
 namespace WebTest.Repositories

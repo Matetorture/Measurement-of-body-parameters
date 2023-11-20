@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.Collections;
 using WebTest.Data.Devices;
 using WebTest.Data.Profiles;
 using WebTest.Data.Tests;

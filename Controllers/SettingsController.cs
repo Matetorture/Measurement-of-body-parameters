@@ -9,12 +9,12 @@ namespace WebTest.Controllers
     {
         public IActionResult Index()
         {
-            var viewModel = new List<SettingsIndexVM> {
-                new SettingsIndexVM { Id = 1, Name = "op1", Value = true },
-                new SettingsIndexVM { Id = 2, Name = "op2", Value = false }
-            };
+            //var viewModel = new List<SettingsIndexVM> {
+            //    new SettingsIndexVM { Id = 1, Name = "op1", Value = true },
+            //    new SettingsIndexVM { Id = 2, Name = "op2", Value = false }
+            //};
 
-            return View(viewModel);
+            return View();
         }
 
         public IActionResult Import()

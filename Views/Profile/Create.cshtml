@@ -1,0 +1,31 @@
+﻿@model WebTest.Models.Profile.ProfileIndexVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <h1>Edit</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            @Model.User.FirstName
+            @if(Model.User.Profile == null)
+            {
+                <form asp-action="Create">
+
+                </form>
+            }
+            else
+            {
+                
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

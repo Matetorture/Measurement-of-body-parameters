@@ -47,8 +47,12 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
+            testEntity.UserId = _context.User
+                .FirstOrDefault(n => n.UserName == User.Identity.Name).Id;
+            testEntity.Date = DateTime.Now;
+
             _repo.Add(testEntity);
 
             return RedirectToAction(nameof(Index));
@@ -67,13 +71,13 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUser,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
             if (id != testEntity.Id)
             {
                 return NotFound();
             }
-
+            
             _repo.Update(testEntity);
 
             return RedirectToAction(nameof(Index));

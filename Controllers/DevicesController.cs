@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebTest.Data;
 using WebTest.Data.Devices;
+using WebTest.Data.Tests;
 using WebTest.Repositories;
 
 namespace WebTest.Controllers
@@ -49,6 +50,10 @@ namespace WebTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,PairingDate,Name,Connect")] DeviceEntity deviceEntity)
         {
+            deviceEntity.UserId = _context.User
+                .FirstOrDefault(n => n.UserName == User.Identity.Name).Id;
+            deviceEntity.PairingDate = DateTime.Now;
+
             _repo.Add(deviceEntity);
 
             return RedirectToAction(nameof(Index));

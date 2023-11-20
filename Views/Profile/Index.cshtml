@@ -1,0 +1,59 @@
+﻿@model WebTest.Models.Profile.ProfileIndexVM
+@{
+    ViewData["Title"] = "My Profil";
+}
+
+<div class="container text-center">
+    <h1>My Profil</h1>
+    <table class="table">
+        <tr>
+            <th scope="col">First Name</th>
+            <td>
+            @if (Model.User.FirstName == null)
+            {
+                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>firs name</u></b></button></a>
+            }
+            else
+            {
+                @Model.User.FirstName
+            }
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">Last Name</th>
+            <td>
+            @if (Model.User.LastName == null)
+            {
+                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>last name</u></b></button></a>
+            }
+            else
+            {
+                @Model.User.LastName
+            }
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">Blood Type</th>
+            <td>
+                @if (Model.User.Profile == null)
+                {
+                    <a asp-controller="User" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>blood type</u></b></button></a>
+                }
+                else
+                {
+                    @Model.User.Profile.BloodType
+
+                    @if (@Model.User.Profile.Rh)
+                    {
+                        <span>+</span>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+

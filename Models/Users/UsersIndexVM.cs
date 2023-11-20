@@ -1,9 +1,11 @@
-﻿namespace WebTest.Models.Settings
+﻿using WebTest.Data.Users;
+using WebTest.Data.Profiles;
+
+namespace WebTest.Models.Users
 {
-    public class SettingsIndexVM
+    public class UsersIndexVM
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public bool Value { get; set; }
+        public UserEntity User { get; set; }
+        public ProfileEntity Profile { get; set; }
     }
 }
