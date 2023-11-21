@@ -19,7 +19,7 @@ namespace WebTest.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var user = _context.User
+            var user = _context.Users
                 .Include(n => n.Tests)
                 .Include(n => n.Devices)
                 .Include(n => n.Profile)

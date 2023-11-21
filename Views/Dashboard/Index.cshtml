@@ -8,7 +8,7 @@
         <div>
             @if (Model.User.FirstName == null && Model.User.LastName == null)
             {
-                <a asp-controller="Profile" asp-action="Create"><button class="btn btn-light mt-2">Start by adding <b><u>first name</u></b> and <b><u>last name</u></b></button></a>
+                <a asp-controller="Profile" asp-action="Edit"><button class="btn btn-light mt-2">Start by adding <b><u>first name</u></b> and <b><u>last name</u></b></button></a>
             }
             else
             {
@@ -20,7 +20,7 @@
             {
                 <a asp-controller="Tests" asp-action="Create"><button class="btn btn-info mt-2 text-white">Add your first <b><u>test</u></b></button></a>
             }
-            @foreach(var test in Model.User.Tests)
+            @foreach (var test in Model.User.Tests)
             {
                 @test.Name <br />
             }

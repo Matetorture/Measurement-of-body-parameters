@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,7 @@ using WebTest.Repositories;
 
 namespace WebTest.Controllers
 {
+    [Authorize]
     public class DevicesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,7 +29,7 @@ namespace WebTest.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return View(_repo.GetAll());
+            return View(_repo.GetAll());
         }
 
         [HttpGet]

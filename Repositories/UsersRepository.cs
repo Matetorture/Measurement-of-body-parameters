@@ -1,15 +1,17 @@
 ﻿using WebTest.Data;
+using WebTest.Data.Profiles;
 using WebTest.Data.Users;
+using WebTest.Models.Profile;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebTest.Repositories
 {
     public interface IUsersRepository
     {
         UserEntity Get(string? id);
-        List<UserEntity> GetAll();
-        bool Add(UserEntity model);
-        bool Update(UserEntity model);
-        bool Delete(string? id);
+        bool Add(ProfileEntity model);
+        bool UpdateUser(UserEntity model);
+        bool Update(ProfileEntity model);
     }
     public class UsersRepository : IUsersRepository
     {
@@ -23,28 +25,24 @@ namespace WebTest.Repositories
             return _context.User.FirstOrDefault(n => n.Id == id);
         }
 
-        public List<UserEntity> GetAll()
+        public bool Add(ProfileEntity model)
         {
-            return _context.User.Select(n => n).ToList();
-        }
-
-        public bool Add(UserEntity model)
-        {
-            _context.User.Add(model);
-            _context.Profile.Add(model.Profile);
+            _context.Profile.Add(model);
             return _context.SaveChanges() > 0;
         }
 
-        public bool Delete(string? id)
+        public bool UpdateUser(UserEntity model)
         {
-            var model = Get(id);
-            _context.User.Remove(model);
+            var user = Get(model.Id);
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            _context.User.Update(user);
             return _context.SaveChanges() > 0;
         }
 
-        public bool Update(UserEntity model)
+        public bool Update(ProfileEntity model)
         {
-            _context.User.Update(model);
+            _context.Profile.Update(model);
             return _context.SaveChanges() > 0;
         }
     }

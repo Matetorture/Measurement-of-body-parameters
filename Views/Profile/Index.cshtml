@@ -11,12 +11,18 @@
             <td>
             @if (Model.User.FirstName == null)
             {
-                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>firs name</u></b></button></a>
+                    <a asp-controller="Profile" asp-action="Edit"><button class="btn btn-success mt-2 text-white">Add your <b><u>firs name</u></b></button></a>
             }
             else
             {
                 @Model.User.FirstName
             }
+            </td>
+            <td width="120px">
+                @if (Model.User.FirstName != null)
+                {
+                    <a asp-action="Edit"><button class="btn btn-warning">Edit</button></a>
+                }
             </td>
         </tr>
         <tr>
@@ -24,35 +30,48 @@
             <td>
             @if (Model.User.LastName == null)
             {
-                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>last name</u></b></button></a>
+                    <a asp-controller="Profile" asp-action="Edit"><button class="btn btn-success mt-2 text-white">Add your <b><u>last name</u></b></button></a>
             }
             else
             {
                 @Model.User.LastName
             }
             </td>
-        </tr>
-        <tr>
-            <th scope="col">Blood Type</th>
             <td>
-                @if (Model.User.Profile == null)
+                @if (Model.User.FirstName != null)
                 {
-                    <a asp-controller="Profile" asp-action="Create"><button class="btn btn-success mt-2 text-white">Add your <b><u>blood type</u></b></button></a>
-                }
-                else
-                {
-                    @Model.User.Profile.BloodType
-
-                    @if (@Model.User.Profile.Rh)
-                    {
-                        <span>+</span>
-                    }
-                    else
-                    {
-                        <span>-</span>
-                    }
+                    <a asp-action="Edit"><button class="btn btn-warning">Edit</button></a>
                 }
             </td>
+        </tr>
+        <tr>
+            @if (Model.User.Profile == null)
+            {   
+                <td colspan="3">
+                    <form asp-action="Index">
+                        <button class="btn btn-info mt-2 text-white">create a <b><u>profile</u></b></button>
+                    </form>
+                </td>
+            }
+            else
+            {  
+                <th scope="col">Blood Type</th>
+                <td>
+                        @Model.User.Profile.BloodType
+
+                        @if (@Model.User.Profile.Rh)
+                        {
+                            <span>+</span>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                </td>
+                <td>
+                    <a asp-action="Edit"><button class="btn btn-warning">Edit</button></a>
+                </td>
+            }
         </tr>
     </table>
 </div>
