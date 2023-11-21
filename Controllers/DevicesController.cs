@@ -29,7 +29,7 @@ namespace WebTest.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(_repo.GetAll());
+            return View(_repo.GetAll(User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
 
         [HttpGet]
@@ -40,7 +40,16 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var device = _repo.Get(id);
+
+            if (device == null || device.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(device);
         }
 
         [HttpGet]
@@ -70,7 +79,15 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var device = _repo.Get(id);
+
+            if (device == null || device.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(device);
         }
 
         [HttpPost]
@@ -95,7 +112,15 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var device = _repo.Get(id);
+
+            if (device == null || device.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(device);
         }
 
         [HttpPost, ActionName("Delete")]

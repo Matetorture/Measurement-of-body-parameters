@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using WebTest.Data;
 using WebTest.Data.Tests;
 
@@ -7,7 +8,7 @@ namespace WebTest.Repositories
     public interface ITestsRepository
     {
         TestEntity Get(int? id);
-        List<TestEntity> GetAll();
+        List<TestEntity> GetAll(string userId);
         bool Add(TestEntity model);
         bool Update(TestEntity model);
         bool Delete(int? id);
@@ -24,9 +25,9 @@ namespace WebTest.Repositories
             return _context.Test.FirstOrDefault(n => n.Id == id);
         }
 
-        public List<TestEntity> GetAll()
+        public List<TestEntity> GetAll(string userId)
         {
-            return _context.Test.Select(n => n).ToList();
+            return _context.Test.Where(n => n.UserId == userId).ToList();
         }
 
         public bool Add(TestEntity model)

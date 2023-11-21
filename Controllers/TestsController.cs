@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using WebTest.Repositories;
 
 namespace WebTest.Controllers
 {
+    [Authorize]
     public class TestsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,7 +28,7 @@ namespace WebTest.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return View(_repo.GetAll());
+            return View(_repo.GetAll(User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
 
         [HttpGet]
@@ -36,7 +39,15 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tests = _repo.Get(id);
+
+            if (tests == null || tests.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(tests);
         }
 
         [HttpGet]
@@ -66,7 +77,15 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tests = _repo.Get(id);
+
+            if (tests == null || tests.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(tests);
         }
 
         [HttpPost]
@@ -91,7 +110,15 @@ namespace WebTest.Controllers
                 return NotFound();
             }
 
-            return View(_repo.Get(id));
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tests = _repo.Get(id);
+
+            if (tests == null || tests.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            return View(tests);
         }
 
         [HttpPost, ActionName("Delete")]
