@@ -9,28 +9,43 @@
             @if (Model.User.FirstName == null && Model.User.LastName == null)
             {
                 <a asp-controller="Profile" asp-action="Edit"><button class="btn btn-light mt-2">Start by adding <b><u>first name</u></b> and <b><u>last name</u></b></button></a>
+                <br />
             }
             else
             {
                 <p class="h5">Welcome, @Model.User.FirstName @Model.User.LastName</p>
             }
             <br />
-            <br />
+            @if (Model.User.Profile == null)
+            {
+                <a asp-controller="Profile" asp-action="Index"><button class="btn btn-dark mt-2 text-white">Add your <b><u>Profile</u></b></button></a>
+                <br />
+                <br />
+            }
             @if(Model.User.Tests.Count == 0)
             {
                 <a asp-controller="Tests" asp-action="Create"><button class="btn btn-info mt-2 text-white">Add your first <b><u>test</u></b></button></a>
+                <br />
             }
-            @foreach (var test in Model.User.Tests)
+            else
             {
-                @test.Name <br />
+                <h3>TESTS</h3>
+                <p>
+                    <b>Number of tests:</b> @Model.User.Tests.Count <br>
+                    <b>Last test:</b> @Model.LastTestDate <br>
+                </p>
             }
+            <br />
             @if (Model.User.Devices.Count == 0)
             {
-                <a asp-controller="Device" asp-action="Create"><button class="btn btn-info mt-2 text-white">Add your first <b><u>device</u></b></button></a>
+                <a asp-controller="Devices" asp-action="Create"><button class="btn btn-info mt-2 text-white">Add your first <b><u>device</u></b></button></a>
             }
-            @foreach (var device in Model.User.Devices)
+            else
             {
-                @device.Name <br />
+                <h3>DEVICES</h3>
+                <p>
+                    <b>Number of connected devices:</b> @Model.ConnectedDevices/@Model.User.Devices.Count <br>
+                </p>
             }
         </div>
     </div>

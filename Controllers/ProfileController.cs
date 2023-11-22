@@ -67,7 +67,7 @@ namespace WebTest.Controllers
 
             _repo.Add(profileEntity);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Edit));
         }
 
         public IActionResult Edit()

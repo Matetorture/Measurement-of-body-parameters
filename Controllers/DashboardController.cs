@@ -25,9 +25,30 @@ namespace WebTest.Controllers
                 .Include(n => n.Profile)
                 .FirstOrDefault(n => n.UserName == User.Identity.Name);
 
+            DateTime lastTestDate;
+            if (user.Tests != null && user.Tests.Any())
+            {
+                lastTestDate = user.Tests.Max(test => test.Date);
+            }
+            else
+            {
+                lastTestDate = DateTime.Now;
+            }
+            int connectedDevicesCount;
+            if (user.Devices != null && user.Devices.Any())
+            {
+                connectedDevicesCount = user.Devices.Count(device => device.Connect);
+            }
+            else
+            {
+                connectedDevicesCount = 0;
+            }
+
             return View(new DashboardIndexVM()
             {
-                User = user
+                User = user,
+                LastTestDate = lastTestDate,
+                ConnectedDevices = connectedDevicesCount
             });
         }
     }
