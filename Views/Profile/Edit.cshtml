@@ -39,17 +39,19 @@
                 <form asp-action="Edit">
                     <input type="hidden" asp-for="User.Profile.Id" />
                     <input type="hidden" asp-for="User.Profile.UserId" />
-                    <div class="form-group">
-                        <label asp-for="User.Profile.BloodType" class="control-label"></label>
-                        <select asp-for="User.Profile.BloodType" asp-items="Html.GetEnumSelectList<BloodType>()" class="form-control">
-                            <option value="">-- Select --</option>
-                        </select>
-                        <span asp-validation-for="User.Profile.BloodType" class="text-danger"></span>
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="User.Profile.Rh" /> @Html.DisplayNameFor(model => model.User.Profile.Rh)
-                        </label>
+                    <div class="row">
+                        <div class="form-group col-10">
+                            <label asp-for="User.Profile.BloodType" class="control-label"></label>
+                            <select asp-for="User.Profile.BloodType" asp-items="Html.GetEnumSelectList<BloodType>()" class="form-control">
+                                <option value="">-- Select --</option>
+                            </select>
+                            <span asp-validation-for="User.Profile.BloodType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check col-2" style="margin-top: 30px;">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="User.Profile.Rh" /> +/-
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-success mt-2" />
