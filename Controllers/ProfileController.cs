@@ -36,23 +36,6 @@ namespace WebTest.Controllers
             });
         }
 
-        public IActionResult Create()
-        {
-            var user = _context.User
-                .Include(n => n.Profile)
-                .FirstOrDefault(n => n.UserName == User.Identity.Name);
-
-            if(user == null)
-            {
-                Edit();
-            }
-
-            return View(new ProfileIndexVM()
-            {
-                User = user
-            });
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ProfileIndexVM user)
