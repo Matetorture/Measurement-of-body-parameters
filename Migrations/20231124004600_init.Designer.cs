@@ -12,8 +12,8 @@ using WebTest.Data;
 namespace WebTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231120125312_add relations")]
-    partial class addrelations
+    [Migration("20231124004600_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,6 +174,7 @@ namespace WebTest.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PairingDate")
@@ -231,28 +232,22 @@ namespace WebTest.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("SafeRange")
-                        .HasColumnType("float");
 
                     b.Property<int>("TestType")
                         .HasColumnType("int");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ValueTemplate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

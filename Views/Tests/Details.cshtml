@@ -12,57 +12,37 @@
     <div>
         <dl class="row">
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </dt>
             <dd class = "col-sm-10">
                 @Html.DisplayFor(model => model.Name)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Date)
+                Date
             </dt>
             <dd class = "col-sm-10">
                 @Html.DisplayFor(model => model.Date)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </dt>
             <dd class = "col-sm-10">
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.SafeRange)
+                Test type
             </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.SafeRange)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Unit)
+            <dd class="col-sm-10 TestTypeDisplay">@Html.DisplayFor(model => model.TestType)</dd>
+            <dt class="col-sm-2 BodyMeasure">
+                Body Measure
             </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Unit)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.ValueTemplate)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.ValueTemplate)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.TestType)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.TestType)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.BodyMeasure)
-            </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-10 BodyMeasure">
                 @Html.DisplayFor(model => model.BodyMeasure)
             </dd>
             <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Value)
+                Value
             </dt>
-            <dd class = "col-sm-10">
+            <dd class="col-sm-10 ValueDisplay">
                 @Html.DisplayFor(model => model.Value)
             </dd>
         </dl>
@@ -73,3 +53,6 @@
         <a asp-action="Index"><button class="btn btn-secondary mt-2">Back to list</button></a>
     </div>
 </div>
+
+
+<script src="~/js/tests.js"></script>

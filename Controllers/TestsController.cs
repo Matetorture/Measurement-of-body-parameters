@@ -58,7 +58,7 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name,Date,Description,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
             testEntity.UserId = _context.User
                 .FirstOrDefault(n => n.UserName == User.Identity.Name).Id;
@@ -90,7 +90,7 @@ namespace WebTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,Date,Description,SafeRange,Unit,ValueTemplate,TestType,BodyMeasure,Value")] TestEntity testEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,Date,Description,TestType,BodyMeasure,Value")] TestEntity testEntity)
         {
             if (id != testEntity.Id)
             {
@@ -133,6 +133,11 @@ namespace WebTest.Controllers
             _repo.Delete(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult GetEnumValues()
+        {
+            return Json(Enum.GetNames(typeof(TestType)));
         }
     }
 }

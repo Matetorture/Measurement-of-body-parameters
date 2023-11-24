@@ -22,29 +22,14 @@
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="SafeRange" class="control-label"></label>
-                    <input asp-for="SafeRange" class="form-control" />
-                    <span asp-validation-for="SafeRange" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Unit" class="control-label"></label>
-                    <input asp-for="Unit" class="form-control" />
-                    <span asp-validation-for="Unit" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ValueTemplate" class="control-label"></label>
-                    <input asp-for="ValueTemplate" class="form-control" />
-                    <span asp-validation-for="ValueTemplate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
+                <div class="form-group" id="TestType">
                     <label asp-for="TestType" class="control-label"></label>
-                    <select asp-for="TestType" asp-items="Html.GetEnumSelectList<TestType>()" class="form-control">
+                    <select asp-for="TestType" asp-items="Html.GetEnumSelectList<TestType>()" class="form-control" id="TestTypeInput">
                         <option value="">-- Select --</option>
                     </select>
                     <span asp-validation-for="TestType" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="BodyMeasure">
                     <label asp-for="BodyMeasure" class="control-label"></label>
                     <select asp-for="BodyMeasure" asp-items="Html.GetEnumSelectList<BodyMeasure>()" class="form-control">
                         <option value="">-- Select --</option>
@@ -53,7 +38,14 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Value" class="control-label"></label>
-                    <input asp-for="Value" class="form-control" />
+                    <div class="row">
+                        <div class="col-10" id="ValueDiv">
+                            <input asp-for="Value" class="form-control" />
+                        </div>
+                        <div class="col-2" style="margin-top: 7px;" id="ValueUnit">
+                            
+                        </div>
+                    </div>
                     <span asp-validation-for="Value" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -69,3 +61,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script src="~/js/tests.js"></script>
