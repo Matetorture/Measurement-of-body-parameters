@@ -8,8 +8,7 @@ try {
     const BodyMeasure = document.querySelector("#BodyMeasure");
     const ValueUnit = document.querySelector("#ValueUnit");
     const ValueDiv = document.querySelector("#ValueDiv");
-
-
+    const ValueInput = ValueDiv.querySelector("input");
 
     TestTypeInput.addEventListener('click', () => {
         showCorrectInputs();
@@ -26,16 +25,24 @@ try {
 
         ValueUnit.innerHTML = units[parseInt(TestTypeInput.value)];
 
+        if (TestTypeInput.value == "") {
+            ValueUnit.innerHTML = "";
+        }
+
         if (units[parseInt(TestTypeInput.value)] != "" && units[parseInt(TestTypeInput.value)] != undefined) {
             ValueDiv.classList.remove('col-12');
             ValueDiv.classList.add('col-10');
 
             ValueUnit.classList.add('col-2');
+
+            ValueInput.type = "number";
         } else {
             ValueDiv.classList.remove('col-10');
             ValueDiv.classList.add('col-12');
 
             ValueUnit.classList.remove('col-2');
+
+            ValueInput.type = "text";
         }
     }
 

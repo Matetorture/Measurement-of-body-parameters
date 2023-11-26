@@ -24,11 +24,11 @@
                         <input class="form-check-input" asp-for="Connect" /> @Html.DisplayNameFor(model => model.Connect)
                     </label>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-success mt-2" />
+                <div class="form-group mt-2">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a asp-action="Index"><button type="button" class="btn btn-secondary">Back to list</button></a>
                 </div>
             </form>
-            <a asp-action="Index"><button class="btn btn-secondary mt-2">Back to list</button></a>
         </div>
     </div>
 </div>
