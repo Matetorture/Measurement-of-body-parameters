@@ -9,6 +9,7 @@
         <div class="col-3">
             <h1>My Tests</h1>
         </div>
+        <div class="col-7"></div>
         <div class="col-2 mt-2">
             <p>
                 <a asp-action="Create"><button class="btn btn-primary">Create new</button></a>
@@ -28,7 +29,22 @@
                     Description
                 </th>
                 <th>
-                    Test Type
+                    <span id="SelectType" style="cursor: pointer;">Test Type ▼</span>
+                    <div class="bg-warning rounded py-3" id="SelectTypeDiv" style="position: absolute; width: 150px; display: none; z-index: 2;">
+                        <span style="cursor: pointer">All</span>
+                        <hr />
+                        <span style="cursor: pointer">Pulse</span>
+                        <hr />
+                        <span style="cursor: pointer">Saturation</span>
+                        <hr />
+                        <span style="cursor: pointer">Weight</span>
+                        <hr />
+                        <span style="cursor: pointer">Height</span>
+                        <hr />
+                        <span style="cursor: pointer">BodyMeasure</span>
+                        <hr />
+                        <span style="cursor: pointer">Observation</span>
+                    </div>
                 </th>
                 <th>
                     Body Measure
@@ -43,7 +59,7 @@
         </thead>
         <tbody>
     @foreach (var item in Model) {
-            <tr>
+            <tr class="ListItems">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -55,7 +71,7 @@
                 </td>
                 <td class="TestTypeDisplay">@Html.DisplayFor(modelItem => item.TestType)</td>
                 <td>
-                        <span class="BodyMeasureList">
+                    <span class="BodyMeasureList">
                         @Html.DisplayFor(modelItem => item.BodyMeasure)
                     </span>
                 </td>
@@ -75,3 +91,4 @@
 
 
 <script src="~/js/tests.js"></script>
+<script src="~/js/listTypeTag.js"></script>
