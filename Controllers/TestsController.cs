@@ -32,6 +32,12 @@ namespace WebTest.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Graph()
+        {
+            return View(_repo.GetAll(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Test == null)
