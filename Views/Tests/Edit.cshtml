@@ -27,14 +27,14 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group" id="TestType">
-                    <label asp-for="TestType" class="control-label"></label>
+                    <label asp-for="TestType" class="control-label">Test Type</label>
                     <select asp-for="TestType" asp-items="Html.GetEnumSelectList<TestType>()" class="form-control" id="TestTypeInput">
                         <option value="">-- Select --</option>
                     </select>
                     <span asp-validation-for="TestType" class="text-danger"></span>
                 </div>
                 <div class="form-group" id="BodyMeasure">
-                    <label asp-for="BodyMeasure" class="control-label"></label>
+                    <label asp-for="BodyMeasure" class="control-label">Body Measure</label>
                     <select asp-for="BodyMeasure" asp-items="Html.GetEnumSelectList<BodyMeasure>()" class="form-control">
                         <option value="">-- Select --</option>
                     </select>
