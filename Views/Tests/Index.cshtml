@@ -19,7 +19,10 @@
         <thead>
             <tr>
                 <th>
-                    Name
+                    <span id="OpenSearch" style="cursor: pointer;">Name <span class="bi bi-search"></span></span>
+                    <div id="SearchDiv" style="position: absolute; width: 170px; display: none; z-index: 2;">
+                        <input type="text" class="form-control border-info" />
+                    </div>
                 </th>
                 <th>
                     Date
@@ -59,9 +62,7 @@
         <tbody>
     @foreach (var item in Model) {
             <tr class="ListItems">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+                <td class="SearchNameDisplay" string = "@item.Name">@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
@@ -91,3 +92,4 @@
 
 <script src="~/js/tests.js"></script>
 <script src="~/js/listTypeTag.js"></script>
+<script src="~/js/search.js"></script>
