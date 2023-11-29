@@ -27,7 +27,7 @@ namespace WebTest.Repositories
 
         public List<TestEntity> GetAll(string userId)
         {
-            return _context.Test.Where(n => n.UserId == userId).ToList();
+            return _context.Test.Where(n => n.UserId == userId).OrderByDescending(n => n.Id).ToList();
         }
 
         public bool Add(TestEntity model)

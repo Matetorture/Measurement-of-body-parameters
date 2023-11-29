@@ -25,8 +25,7 @@ namespace WebTest.Repositories
 
         public List<DeviceEntity> GetAll(string userId)
         {
-            //return _context.Device.Select(n => n).ToList();
-            return _context.Device.Where(n => n.UserId == userId).ToList();
+            return _context.Device.Where(n => n.UserId == userId).OrderByDescending(n => n.Id).ToList();
         }
 
         public bool Add(DeviceEntity model)

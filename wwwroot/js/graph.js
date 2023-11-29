@@ -43,6 +43,13 @@ dataArray.forEach((e, i) => {
 });
 
 for (let i = 0; i < Types.length; i++) {
+    eval(`
+        ${Types[i]} = ${Types[i]}.reverse(); 
+        ${Types[i]}Date = ${Types[i]}Date.reverse();
+    `);
+}
+
+for (let i = 0; i < Types.length; i++) {
     console.log(eval(Types[i]).length == 0);
     eval(`
         if(${eval(eval(Types[i]).length > 0)}){

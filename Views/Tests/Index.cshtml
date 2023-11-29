@@ -19,8 +19,8 @@
         <thead>
             <tr>
                 <th>
-                    <span id="OpenSearch" style="cursor: pointer;">Name <span class="bi bi-search"></span></span>
-                    <div id="SearchDiv" style="position: absolute; width: 170px; display: none; z-index: 2;">
+                    <span id="OpenSearch-Name" style="cursor: pointer;">Name <span class="bi bi-search"></span></span>
+                    <div id="SearchDiv-Name" style="position: absolute; width: 170px; display: none; z-index: 2;">
                         <input type="text" class="form-control border-info" />
                     </div>
                 </th>
@@ -28,7 +28,10 @@
                     Date
                 </th>
                 <th>
-                    Description
+                    <span id="OpenSearch-Description" style="cursor: pointer;">Description <span class="bi bi-search"></span></span>
+                    <div id="SearchDiv-Description" style="position: absolute; width: 170px; display: none; z-index: 2;">
+                        <input type="text" class="form-control border-info" />
+                    </div>
                 </th>
                 <th>
                     <span id="SelectType" style="cursor: pointer;">Test Type ▼</span>
@@ -62,13 +65,11 @@
         <tbody>
     @foreach (var item in Model) {
             <tr class="ListItems">
-                <td class="SearchNameDisplay" string = "@item.Name">@Html.DisplayFor(modelItem => item.Name)</td>
+                <td class="SearchDisplay-Name" string="@item.Name">@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                <td class="SearchDisplay-Description" string="@item.Description">@Html.DisplayFor(modelItem => item.Description)</td>
                 <td class="TestTypeDisplay">@Html.DisplayFor(modelItem => item.TestType)</td>
                 <td>
                     <span class="BodyMeasureList">
